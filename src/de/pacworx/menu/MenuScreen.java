@@ -22,7 +22,9 @@ public class MenuScreen extends Screen {
     paint = new Paint();
     paint.setColor(Color.BLACK);
     paint.setTextSize(35);
-    paint.setTypeface(Typeface.DEFAULT_BOLD);
+
+    Typeface typeface = Typeface.createFromAsset(((AndroidGame) game).getAssets(), "edo.ttf");
+    paint.setTypeface(typeface);
     paint.setTextAlign(Paint.Align.LEFT);
   }
 
@@ -44,6 +46,24 @@ public class MenuScreen extends Screen {
           } catch (ClassNotFoundException e) {
             Log.e("Kinderleicht", e.getMessage(), e);
           }
+        } else if ((event.y >= 160) && (event.y < 250)) {
+          try {
+            Class clazz = Class.forName("de.pacworx.fallobst.FallobstActivity");
+            Activity activity = (AndroidGame) game;
+            Intent intent = new Intent(activity, clazz);
+            activity.startActivity(intent);
+          } catch (ClassNotFoundException e) {
+            Log.e("Kinderleicht", e.getMessage(), e);
+          }
+        } else if ((event.y >= 260) && (event.y < 350)) {
+          try {
+            Class clazz = Class.forName("de.pacworx.test.Playground");
+            Activity activity = (AndroidGame) game;
+            Intent intent = new Intent(activity, clazz);
+            activity.startActivity(intent);
+          } catch (ClassNotFoundException e) {
+            Log.e("Kinderleicht", e.getMessage(), e);
+          }
         }
       }
     }
@@ -59,6 +79,12 @@ public class MenuScreen extends Screen {
     paint.setTextAlign(Paint.Align.LEFT);
     g.drawPixmap(Assets.farbeimerIcon, 10, 60, 90, 90);
     g.drawText("Farbeimer", 110, 115, paint);
+
+    g.drawPixmap(Assets.fallobstIcon, 10, 160, 90, 90);
+    g.drawText("Fallobst", 110, 215, paint);
+
+    g.drawPixmap(Assets.playgroundIcon, 10, 260, 90, 90);
+    g.drawText("Playground", 110, 315, paint);
 
     g.drawPixmap(Assets.settings, 10, 619, 90, 90);
     g.drawText("Einstellungen", 110, 680, paint);

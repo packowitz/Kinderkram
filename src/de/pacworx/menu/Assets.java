@@ -16,6 +16,8 @@ public class Assets {
   public static Pixmap settings;
 
   public static Pixmap farbeimerIcon;
+  public static Pixmap fallobstIcon;
+  public static Pixmap playgroundIcon;
 
   public static void init(Game game) {
     Graphics graphics = game.getGraphics();
@@ -27,5 +29,8 @@ public class Assets {
     difficulty3 = graphics.newPixmap("difficulty3.png", PixmapFormat.RGB565);
     settings = graphics.newPixmap("settings.png", PixmapFormat.RGB565);
     farbeimerIcon = graphics.newPixmap("farbeimer/icon.png", PixmapFormat.RGB565);
+    fallobstIcon = graphics.newPixmap("fallobst/red.png", PixmapFormat.RGB565);
+
+    playgroundIcon = graphics.newPixmap("test/playgroundIcon.png", PixmapFormat.RGB565);
   }
 }
