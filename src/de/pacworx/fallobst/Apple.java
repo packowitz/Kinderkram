@@ -77,7 +77,7 @@ public class Apple {
         if (velocity.y > (maxFallingSpeed * gameSpeed)) {
           velocity.add(0, GRAVITY * gameSpeed * delta);
         }
-        velocity.x = -accel * gameSpeed * accelSpeed;
+        velocity.x = -accel * accelSpeed;
         position.add(velocity.x * delta, velocity.y * delta);
         if (position.x < (size / 2)) {
           position.x = size / 2;

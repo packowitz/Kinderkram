@@ -10,10 +10,13 @@ import com.badlogic.gdx.utils.Array;
 public class World {
   public static final int WIDTH = 480;
   public static final int HEIGHT = 720;
+  public static final int STATE_LIVING = 0;
+  public static final int STATE_GAME_OVER = 1;
 
-  public float accelSpeed = 25; //settings for easy
+  public float accelSpeed = 30; //settings for easy
   public float maxFallingSpeed = -150; //settings for easy
   public float gameSpeed = 1;
+  public int state = STATE_LIVING;
 
   private Random random = new Random();
   public Array<Vector2> spawningPositions = new Array<Vector2>(false, 35);
@@ -21,6 +24,7 @@ public class World {
   public Array<Apple> apples = new Array<Apple>(false, 35);
   public Array<Bonus> bonuses = new Array<Bonus>(false, 10);
   private Array<Bonus> bonusPool = new Array<Bonus>(false, 10);
+  public Basket basket = new Basket(WIDTH / 2, 0);
   public int applesCollected = 0;
   private float gameTime = 0f;
 
@@ -30,6 +34,9 @@ public class World {
   }
 
   public void update(float delta, float accel) {
+    if (delta > 0.04) {
+      delta = 0.04f;
+    }
     gameTime += delta;
     for (int i = 0; i < bonuses.size; i++) {
       Bonus bonus = bonuses.get(i);
@@ -42,8 +49,16 @@ public class World {
     }
     for (Apple apple : apples) {
       apple.update(delta, accel, gameSpeed);
-      if ((apple.state == Apple.STATE_FALLING) && (apple.position.y <= 0)) {
+      if (basket.isInBasket(apple.position)) {
         catchedAnApple(apple);
+      }
+      if ((apple.state == Apple.STATE_FALLING) && (apple.position.y <= 0)) {
+        state = STATE_GAME_OVER;
+
+        //TODO tmp code until game over is implemented
+        letAnAppleShakle();
+        spawningPositions.add(apple.originalPosition);
+        apple.spawn(getRandomPosition(), accelSpeed, maxFallingSpeed);
       }
     }
   }
@@ -55,7 +70,7 @@ public class World {
     bonuses.add(bonus);
     bonus.spawn(apple.position.x, apple.position.y);
     applesCollected++;
-    gameSpeed += 0.2f;
+    gameSpeed += 0.4f;
 
     spawningPositions.add(apple.originalPosition);
     apple.spawn(getRandomPosition(), accelSpeed, maxFallingSpeed);
@@ -92,7 +107,7 @@ public class World {
       if (i == 0) {
         apple.spawn(getRandomPosition(), accelSpeed, maxFallingSpeed);
       } else {
-        int state = (i == 1) ? Apple.STATE_FALLING : Apple.STATE_READY;
+        int state = (i == 1) ? Apple.STATE_SHAKLING : Apple.STATE_READY;
         apple.spawnInState(getRandomPosition(), accelSpeed, maxFallingSpeed, state);
       }
       apples.add(apple);
@@ -100,51 +115,51 @@ public class World {
   }
 
   private void createSpawningPositions() {
-    spawningPositions.add(new Vector2(250, 420));
-    spawningPositions.add(new Vector2(170, 650));
-    spawningPositions.add(new Vector2(410, 460));
     spawningPositions.add(new Vector2(50, 395));
-    spawningPositions.add(new Vector2(200, 520));
-    spawningPositions.add(new Vector2(220, 360));
-    spawningPositions.add(new Vector2(360, 500));
-    spawningPositions.add(new Vector2(140, 600));
-    spawningPositions.add(new Vector2(320, 575));
-    spawningPositions.add(new Vector2(100, 550));
-    spawningPositions.add(new Vector2(310, 530));
-    spawningPositions.add(new Vector2(260, 480));
-    spawningPositions.add(new Vector2(200, 400));
-    spawningPositions.add(new Vector2(230, 580));
-    spawningPositions.add(new Vector2(120, 400));
-    spawningPositions.add(new Vector2(280, 360));
-    spawningPositions.add(new Vector2(130, 455));
-    spawningPositions.add(new Vector2(330, 460));
-    spawningPositions.add(new Vector2(140, 485));
-    spawningPositions.add(new Vector2(355, 370));
-    spawningPositions.add(new Vector2(320, 390));
-    spawningPositions.add(new Vector2(275, 540));
     spawningPositions.add(new Vector2(80, 485));
-    spawningPositions.add(new Vector2(360, 500));
-    spawningPositions.add(new Vector2(380, 390));
-    spawningPositions.add(new Vector2(230, 500));
-    spawningPositions.add(new Vector2(190, 600));
-    spawningPositions.add(new Vector2(265, 610));
-    spawningPositions.add(new Vector2(225, 450));
-    spawningPositions.add(new Vector2(285, 430));
+    spawningPositions.add(new Vector2(100, 550));
+    spawningPositions.add(new Vector2(120, 400));
+    spawningPositions.add(new Vector2(130, 455));
+    spawningPositions.add(new Vector2(140, 485));
+    spawningPositions.add(new Vector2(145, 600));
     spawningPositions.add(new Vector2(150, 560));
+    spawningPositions.add(new Vector2(170, 650));
     spawningPositions.add(new Vector2(185, 430));
+    spawningPositions.add(new Vector2(190, 600));
+    spawningPositions.add(new Vector2(195, 400));
     spawningPositions.add(new Vector2(200, 470));
+    spawningPositions.add(new Vector2(205, 545));
+    spawningPositions.add(new Vector2(210, 510));
+    spawningPositions.add(new Vector2(215, 360));
+    spawningPositions.add(new Vector2(225, 430));
+    spawningPositions.add(new Vector2(230, 580));
+    spawningPositions.add(new Vector2(250, 400));
+    spawningPositions.add(new Vector2(260, 480));
+    spawningPositions.add(new Vector2(265, 610));
+    spawningPositions.add(new Vector2(275, 540));
+    spawningPositions.add(new Vector2(280, 360));
+    spawningPositions.add(new Vector2(285, 430));
+    spawningPositions.add(new Vector2(310, 530));
+    spawningPositions.add(new Vector2(315, 390));
+    spawningPositions.add(new Vector2(320, 575));
+    spawningPositions.add(new Vector2(330, 460));
+    spawningPositions.add(new Vector2(355, 370));
+    spawningPositions.add(new Vector2(360, 400));
+    spawningPositions.add(new Vector2(365, 500));
     spawningPositions.add(new Vector2(380, 435));
-    spawningPositions.add(new Vector2(380, 540));
+    spawningPositions.add(new Vector2(390, 540));
+    spawningPositions.add(new Vector2(405, 390));
+    spawningPositions.add(new Vector2(410, 460));
 
-    staticApples.add(new Vector2(350, 330));
-    staticApples.add(new Vector2(100, 330));
-    staticApples.add(new Vector2(125, 225));
-    staticApples.add(new Vector2(300, 235));
-    staticApples.add(new Vector2(365, 245));
-    staticApples.add(new Vector2(430, 325));
-    staticApples.add(new Vector2(340, 290));
-    staticApples.add(new Vector2(300, 300));
-    staticApples.add(new Vector2(70, 270));
-    staticApples.add(new Vector2(400, 270));
+    staticApples.add(new Vector2(352, 330));
+    staticApples.add(new Vector2(102, 330));
+    staticApples.add(new Vector2(127, 225));
+    staticApples.add(new Vector2(302, 235));
+    staticApples.add(new Vector2(363, 245));
+    staticApples.add(new Vector2(432, 325));
+    staticApples.add(new Vector2(342, 290));
+    staticApples.add(new Vector2(302, 300));
+    staticApples.add(new Vector2(72, 270));
+    staticApples.add(new Vector2(402, 270));
   }
 }

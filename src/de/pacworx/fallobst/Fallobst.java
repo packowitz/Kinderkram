@@ -50,6 +50,8 @@ public class Fallobst implements ApplicationListener {
     batch.begin();
     batch.draw(Assets.background, 0, 0, World.WIDTH, World.HEIGHT);
 
+    batch.draw(Assets.basket, world.basket.position.x, world.basket.position.y, Basket.SIZE, Basket.SIZE);
+
     for (Vector2 vec : world.staticApples) {
       batch.draw(Assets.apple, vec.x, vec.y, Apple.APPLE_SIZE, Apple.APPLE_SIZE);
     }
@@ -63,6 +65,12 @@ public class Fallobst implements ApplicationListener {
     batch.draw(Assets.apple, 20, 675, 32, 32);
     font.draw(batch, ": ", 54, 706);
     font.draw(batch, "" + world.applesCollected, 64, 704);
+
+    //    if (Gdx.input.isTouched()) {
+    //      Vector3 vec = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+    //      camera.unproject(vec);
+    //      font.draw(batch, "X: " + vec.x + "; Y: " + vec.y, 10, 40);
+    //    }
     batch.end();
   }
 
