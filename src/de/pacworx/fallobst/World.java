@@ -26,7 +26,6 @@ public class World {
   private Array<Bonus> bonusPool = new Array<Bonus>(false, 10);
   public Basket basket = new Basket(WIDTH / 2, 0);
   public int applesCollected = 0;
-  private float gameTime = 0f;
 
   public World() {
     createSpawningPositions();
@@ -37,7 +36,6 @@ public class World {
     if (delta > 0.04) {
       delta = 0.04f;
     }
-    gameTime += delta;
     for (int i = 0; i < bonuses.size; i++) {
       Bonus bonus = bonuses.get(i);
       bonus.update(delta);
@@ -54,11 +52,6 @@ public class World {
       }
       if ((apple.state == Apple.STATE_FALLING) && (apple.position.y <= 0)) {
         state = STATE_GAME_OVER;
-
-        //TODO tmp code until game over is implemented
-        letAnAppleShakle();
-        spawningPositions.add(apple.originalPosition);
-        apple.spawn(getRandomPosition(), accelSpeed, maxFallingSpeed);
       }
     }
   }

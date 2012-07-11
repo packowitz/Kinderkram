@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 
 public class Basket {
-  public static final float SIZE = 120;
+  public static final float SIZE = 100;
   private final float Y_BOUND = SIZE * 2 / 3;
   public final Vector2 position = new Vector2();
 

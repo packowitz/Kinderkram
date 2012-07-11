@@ -8,7 +8,7 @@ public class Apple {
   public static final int STATE_READY = 1;
   public static final int STATE_SHAKLING = 2;
   public static final int STATE_FALLING = 3;
-  public static final int GRAVITY = -30;
+  public static final int GRAVITY = -40;
   public static final float APPLE_SIZE = 32;
   public static final float GROWING_SPEED = APPLE_SIZE / 6;
   public static final float SHAKLE_TIME = 1.2f;

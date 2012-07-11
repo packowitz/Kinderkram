@@ -13,6 +13,6 @@ public class FallobstActivity extends AndroidApplication {
     AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
     cfg.useWakelock = true;
 
-    initialize(new Fallobst(), cfg);
+    initialize(new FallobstGame(this), cfg);
   }
 }

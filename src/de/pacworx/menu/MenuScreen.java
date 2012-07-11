@@ -78,10 +78,10 @@ public class MenuScreen extends Screen {
 
     paint.setTextAlign(Paint.Align.LEFT);
     g.drawPixmap(Assets.farbeimerIcon, 10, 60, 90, 90);
-    g.drawText("Farbeimer", 110, 115, paint);
+    g.drawText("Is ja'n Klecks", 110, 115, paint);
 
     g.drawPixmap(Assets.fallobstIcon, 10, 160, 90, 90);
-    g.drawText("Fallobst", 110, 215, paint);
+    g.drawText("Apfelernte", 110, 215, paint);
 
     g.drawPixmap(Assets.playgroundIcon, 10, 260, 90, 90);
     g.drawText("Playground", 110, 315, paint);
