@@ -6,23 +6,24 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import android.os.Environment;
 import android.util.Log;
 import de.pacworx.Difficulty;
+import de.pacworx.Settings;
 
 
 public class Highscore {
-  public Difficulty difficulty;
-  public List<HighscoreEntry> scores = new ArrayList<HighscoreEntry>();
+  private Map<Difficulty, List<HighscoreEntry>> scoreMap = new HashMap<Difficulty, List<HighscoreEntry>>();
   private boolean ascendantOrder;
   private int maxSize;
   private String gameName;
   private Properties properties;
 
-  public Highscore(Difficulty difficulty, boolean ascendantOrder, int maxSize, String gameName) {
-    this.difficulty = difficulty;
+  public Highscore(boolean ascendantOrder, int maxSize, String gameName) {
     this.ascendantOrder = ascendantOrder;
     this.maxSize = maxSize;
     this.gameName = gameName;
@@ -32,7 +33,7 @@ public class Highscore {
         String externalStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
 
         BufferedInputStream stream = new BufferedInputStream(new FileInputStream(
-          externalStoragePath + "/kinderkram/" + gameName));
+          externalStoragePath + "kinderkram/" + gameName));
         this.properties.load(stream);
       } catch (IOException e) {
         Log.e("Kinderkram", e.getMessage(), e);
@@ -40,10 +41,17 @@ public class Highscore {
     } else {
       Log.w("Kinderkram", "External storage not available");
     }
-    readScores();
   }
 
-  private void readScores() {
+  public List<HighscoreEntry> getScores() {
+    if (!scoreMap.containsKey(Settings.getDifficulty())) {
+      scoreMap.put(Settings.getDifficulty(), readScores(Settings.getDifficulty()));
+    }
+    return scoreMap.get(Settings.getDifficulty());
+  }
+
+  private List<HighscoreEntry> readScores(Difficulty difficulty) {
+    List<HighscoreEntry> scores = new ArrayList<HighscoreEntry>();
     String date, scoreString;
     for (int i = 0; i < maxSize; i++) {
       scoreString = properties.getProperty(difficulty.name() + "." + i + ".score");
@@ -53,19 +61,20 @@ public class Highscore {
       date = properties.getProperty(difficulty.name() + "." + i + ".date");
       scores.add(new HighscoreEntry(Integer.parseInt(scoreString), date));
     }
+    return scores;
   }
 
-  private void writeScores() {
+  private void writeScores(Difficulty difficulty, List<HighscoreEntry> scores) {
     for (int i = 0; i < scores.size(); i++) {
       HighscoreEntry entry = scores.get(i);
-      properties.put(difficulty.name() + "." + i + ".score", entry.score);
+      properties.put(difficulty.name() + "." + i + ".score", "" + entry.score);
       properties.put(difficulty.name() + "." + i + ".date", entry.date);
     }
 
     if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
       try {
         String externalStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
-        FileOutputStream stream = new FileOutputStream(externalStoragePath + "/kinderkram/" + gameName);
+        FileOutputStream stream = new FileOutputStream(externalStoragePath + "kinderkram/" + gameName);
         properties.store(stream, null);
       } catch (IOException e) {
         Log.e("Kinderkram", e.getMessage(), e);
@@ -77,6 +86,7 @@ public class Highscore {
 
   public int insertScore(int score) {
     int position = 0;
+    List<HighscoreEntry> scores = getScores();
     for (int i = 0; i < scores.size(); i++) {
       HighscoreEntry entry = scores.get(i);
       if ((ascendantOrder && (score > entry.score)) || (!ascendantOrder && (score < entry.score))) {
@@ -96,7 +106,7 @@ public class Highscore {
       position = scores.size();
     }
     if (position > 0) {
-      writeScores();
+      writeScores(Settings.getDifficulty(), scores);
     }
 
     return position;

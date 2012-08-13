@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Random;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import de.pacworx.Difficulty;
+import de.pacworx.Settings;
+import de.pacworx.kinderkram.Highscore;
 
 
 public class World {
@@ -13,21 +16,33 @@ public class World {
   public static final int STATE_LIVING = 0;
   public static final int STATE_GAME_OVER = 1;
 
-  public float accelSpeed = 30; //settings for easy
-  public float maxFallingSpeed = -150; //settings for easy
-  public float gameSpeed = 1;
+  public float accelSpeed;
+  public float maxFallingSpeed;
+  public float gameSpeed;
   public int state = STATE_LIVING;
 
-  private Random random = new Random();
+  private Highscore highscore;
+  public static Random random = new Random();
   public Array<Vector2> spawningPositions = new Array<Vector2>(false, 35);
   public List<Vector2> staticApples = new ArrayList<Vector2>(10);
   public Array<Apple> apples = new Array<Apple>(false, 35);
   public Array<Bonus> bonuses = new Array<Bonus>(false, 10);
   private Array<Bonus> bonusPool = new Array<Bonus>(false, 10);
-  public Basket basket = new Basket(WIDTH / 2, 0);
+  public Basket basket = new Basket();
   public int applesCollected = 0;
+  public int highscorePosition = 0;
 
-  public World() {
+  public World(Highscore highscore) {
+    this.highscore = highscore;
+    if ((Settings.getDifficulty() == Difficulty.KINDERGARTEN) || (Settings.getDifficulty() == Difficulty.VORSCHULE)) {
+      accelSpeed = 30;
+      maxFallingSpeed = -150;
+      gameSpeed = 1;
+    } else {
+      accelSpeed = 45;
+      maxFallingSpeed = -300;
+      gameSpeed = 2f;
+    }
     createSpawningPositions();
     initApples();
   }
@@ -36,6 +51,7 @@ public class World {
     if (delta > 0.04) {
       delta = 0.04f;
     }
+    basket.update(delta);
     for (int i = 0; i < bonuses.size; i++) {
       Bonus bonus = bonuses.get(i);
       bonus.update(delta);
@@ -47,11 +63,20 @@ public class World {
     }
     for (Apple apple : apples) {
       apple.update(delta, accel, gameSpeed);
-      if (basket.isInBasket(apple.position)) {
-        catchedAnApple(apple);
-      }
-      if ((apple.state == Apple.STATE_FALLING) && (apple.position.y <= 0)) {
-        state = STATE_GAME_OVER;
+      if (apple.isRotten) {
+        if (basket.isInBasket(apple.position)) {
+          finishGame();
+        }
+        if ((apple.state == Apple.STATE_FALLING) && (apple.position.y <= 0)) {
+          catchedAnApple(apple);
+        }
+      } else {
+        if (basket.isInBasket(apple.position)) {
+          catchedAnApple(apple);
+        }
+        if ((apple.state == Apple.STATE_FALLING) && (apple.position.y <= 0)) {
+          finishGame();
+        }
       }
     }
   }
@@ -67,6 +92,13 @@ public class World {
 
     spawningPositions.add(apple.originalPosition);
     apple.spawn(getRandomPosition(), accelSpeed, maxFallingSpeed);
+  }
+
+  private void finishGame() {
+    this.state = STATE_GAME_OVER;
+
+    highscorePosition = highscore.insertScore(applesCollected);
+
   }
 
   private void letAnAppleShakle() {

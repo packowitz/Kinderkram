@@ -21,8 +21,13 @@ public class Settings {
       try {
         externalStoragePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
 
+        File dir = new File(externalStoragePath + "kinderkram");
+        if (!dir.exists() || !dir.isDirectory()) {
+          dir.mkdir();
+        }
+
         BufferedInputStream stream = new BufferedInputStream(new FileInputStream(
-          externalStoragePath + "/kinderkram/settings"));
+          externalStoragePath + "kinderkram/settings"));
         properties.load(stream);
       } catch (IOException e) {
         Log.e("Kinderkram", e.getMessage(), e);
@@ -33,7 +38,7 @@ public class Settings {
   public static void save() {
     if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
       try {
-        FileOutputStream stream = new FileOutputStream(externalStoragePath + "/kinderkram/settings");
+        FileOutputStream stream = new FileOutputStream(externalStoragePath + "kinderkram/settings");
         properties.store(stream, null);
       } catch (IOException e) {
         Log.e("Kinderkram", e.getMessage(), e);

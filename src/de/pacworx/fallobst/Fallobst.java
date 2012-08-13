@@ -20,7 +20,7 @@ public class Fallobst implements Screen {
 
   public Fallobst(FallobstGame game) {
     this.game = game;
-    world = new World();
+    world = new World(game.highscore);
     font = new BitmapFont(Gdx.files.internal("calibri.fnt"), false);
     camera = new OrthographicCamera(World.WIDTH, World.HEIGHT);
     camera.position.set(World.WIDTH / 2, World.HEIGHT / 2, 0);
@@ -99,7 +99,8 @@ public class Fallobst implements Screen {
   }
 
   private void renderApple(SpriteBatch batch, Apple apple) {
-    batch.draw(Assets.apple, apple.position.x - (apple.size / 2) + apple.shakleOffset,
+    batch.draw(apple.isRotten ? Assets.apple_brown : Assets.apple,
+      apple.position.x - (apple.size / 2) + apple.shakleOffset,
       apple.position.y - (apple.size / 2), apple.size, apple.size);
   }
 

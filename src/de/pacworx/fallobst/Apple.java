@@ -1,6 +1,8 @@
 package de.pacworx.fallobst;
 
 import com.badlogic.gdx.math.Vector2;
+import de.pacworx.Difficulty;
+import de.pacworx.Settings;
 
 
 public class Apple {
@@ -25,6 +27,7 @@ public class Apple {
   public float stateTime;
   public float shakleOffset;
   public int shakleDir = 1;
+  public boolean isRotten = false;
 
   public void spawn(Vector2 position, float accelSpeed, float maxFallingSpeed) {
     originalPosition = position;
@@ -38,6 +41,12 @@ public class Apple {
     state = STATE_GROWING;
     stateTime = 0;
     shakleOffset = 0;
+    if (((Settings.getDifficulty() == Difficulty.SCHULE_1_2) || (Settings.getDifficulty() == Difficulty.SCHULE_3_4)) &&
+        (World.random.nextFloat() < 0.35)) {
+      isRotten = true;
+    } else {
+      isRotten = false;
+    }
   }
 
   public void spawnInState(Vector2 position, float accelSpeed, float maxFallingSpeed, int state) {
