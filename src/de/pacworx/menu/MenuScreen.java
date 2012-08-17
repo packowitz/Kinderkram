@@ -39,7 +39,7 @@ public class MenuScreen extends Screen {
           game.setScreen(new WelcomeScreen(game));
         } else if ((event.y >= 60) && (event.y < 150)) {
           try {
-            Class clazz = Class.forName("de.pacworx.farbeimer.FarbeimerActivity");
+            Class clazz = Class.forName("de.pacworx.farbkleckse.FarbkleckseActivity");
             Activity activity = (AndroidGame) game;
             Intent intent = new Intent(activity, clazz);
             activity.startActivity(intent);
@@ -57,7 +57,7 @@ public class MenuScreen extends Screen {
           }
         } else if ((event.y >= 260) && (event.y < 350)) {
           try {
-            Class clazz = Class.forName("de.pacworx.test.Playground");
+            Class clazz = Class.forName("de.pacworx.farbeimer.FarbeimerActivity");
             Activity activity = (AndroidGame) game;
             Intent intent = new Intent(activity, clazz);
             activity.startActivity(intent);
@@ -77,7 +77,7 @@ public class MenuScreen extends Screen {
     g.drawText("Spiele", 240, 45, paint);
 
     paint.setTextAlign(Paint.Align.LEFT);
-    g.drawPixmap(Assets.farbeimerIcon, 10, 60, 90, 90);
+    g.drawPixmap(Assets.farbkleckseIcon, 10, 60, 90, 90);
     g.drawText("Is ja'n Klecks", 110, 115, paint);
 
     g.drawPixmap(Assets.fallobstIcon, 10, 160, 90, 90);

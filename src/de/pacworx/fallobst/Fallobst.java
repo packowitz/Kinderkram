@@ -4,15 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import de.pacworx.kinderkram.Fonts;
 
 
 public class Fallobst implements Screen {
   private FallobstGame game;
   private World world;
-  private BitmapFont font;
   private OrthographicCamera camera;
   private SpriteBatch batch;
   private MovingObject movingScore;
@@ -21,7 +20,6 @@ public class Fallobst implements Screen {
   public Fallobst(FallobstGame game) {
     this.game = game;
     world = new World(game.highscore);
-    font = new BitmapFont(Gdx.files.internal("calibri.fnt"), false);
     camera = new OrthographicCamera(World.WIDTH, World.HEIGHT);
     camera.position.set(World.WIDTH / 2, World.HEIGHT / 2, 0);
     batch = new SpriteBatch(100);
@@ -61,7 +59,7 @@ public class Fallobst implements Screen {
       }
 
       for (Bonus bonus : world.bonuses) {
-        font.draw(batch, "+1", bonus.position.x - 16, bonus.position.y + 16);
+        Fonts.calibri_gold.draw(batch, "+1", bonus.position.x - 16, bonus.position.y + 16);
       }
     } else {
       //Game Over
@@ -74,16 +72,16 @@ public class Fallobst implements Screen {
 
     batch.draw(Assets.apple, 20, 675, 32, 32);
     if (world.state != World.STATE_GAME_OVER) {
-      font.draw(batch, ": ", 54, 706);
-      font.draw(batch, "" + world.applesCollected, 64, 704);
+      Fonts.calibri_gold.draw(batch, ": ", 54, 706);
+      Fonts.calibri_gold.draw(batch, "" + world.applesCollected, 64, 704);
     } else {
       //Game Over
       if (movingScore == null) {
-        float textWidth = font.getBounds("" + world.applesCollected).width;
+        float textWidth = Fonts.calibri_gold.getBounds("" + world.applesCollected).width;
         movingScore = new MovingObject(64, 704, 240 - (textWidth / 2), 360, 2);
       }
       movingScore.update(delta);
-      font.draw(batch, "" + world.applesCollected, movingScore.position.x, movingScore.position.y);
+      Fonts.calibri_gold.draw(batch, "" + world.applesCollected, movingScore.position.x, movingScore.position.y);
     }
 
     //    if (Gdx.input.isTouched()) {

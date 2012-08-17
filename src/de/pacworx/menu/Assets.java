@@ -15,7 +15,7 @@ public class Assets {
   public static Pixmap difficulty3;
   public static Pixmap settings;
 
-  public static Pixmap farbeimerIcon;
+  public static Pixmap farbkleckseIcon;
   public static Pixmap fallobstIcon;
   public static Pixmap playgroundIcon;
 
@@ -28,8 +28,8 @@ public class Assets {
     difficulty2 = graphics.newPixmap("difficulty2.png", PixmapFormat.RGB565);
     difficulty3 = graphics.newPixmap("difficulty3.png", PixmapFormat.RGB565);
     settings = graphics.newPixmap("settings.png", PixmapFormat.RGB565);
-    farbeimerIcon = graphics.newPixmap("farbeimer/icon.png", PixmapFormat.RGB565);
-    fallobstIcon = graphics.newPixmap("fallobst/red.png", PixmapFormat.RGB565);
+    farbkleckseIcon = graphics.newPixmap("farbkleckse/icon.png", PixmapFormat.RGB565);
+    fallobstIcon = graphics.newPixmap("fallobst/icon.png", PixmapFormat.RGB565);
 
     playgroundIcon = graphics.newPixmap("test/playgroundIcon.png", PixmapFormat.RGB565);
   }

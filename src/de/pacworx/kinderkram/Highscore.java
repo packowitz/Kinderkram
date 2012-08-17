@@ -43,6 +43,10 @@ public class Highscore {
     }
   }
 
+  public boolean isEmpty() {
+    return getScores().isEmpty();
+  }
+
   public List<HighscoreEntry> getScores() {
     if (!scoreMap.containsKey(Settings.getDifficulty())) {
       scoreMap.put(Settings.getDifficulty(), readScores(Settings.getDifficulty()));

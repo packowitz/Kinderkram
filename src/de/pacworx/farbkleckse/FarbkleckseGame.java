@@ -1,4 +1,4 @@
-package de.pacworx.fallobst;
+package de.pacworx.farbkleckse;
 
 import android.app.Activity;
 import com.badlogic.gdx.Game;
@@ -6,13 +6,13 @@ import de.pacworx.kinderkram.Fonts;
 import de.pacworx.kinderkram.Highscore;
 
 
-public class FallobstGame extends Game {
+public class FarbkleckseGame extends Game {
   private Activity activity;
   public Highscore highscore;
 
-  public FallobstGame(Activity activity) {
+  public FarbkleckseGame(Activity activity) {
     this.activity = activity;
-    highscore = new Highscore(true, 4, "apfelernte");
+    highscore = new Highscore(false, 4, "farbkleckse");
   }
 
   public void finish() {
@@ -35,5 +35,4 @@ public class FallobstGame extends Game {
     super.dispose();
     Assets.dispose();
   }
-
 }
