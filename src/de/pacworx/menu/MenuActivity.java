@@ -7,7 +7,6 @@ import de.pacworx.game.impl.AndroidGame;
 
 
 public class MenuActivity extends AndroidGame {
-  @Override
   public Screen getStartScreen() {
     Settings.loadSettings();
     Assets.init(this);

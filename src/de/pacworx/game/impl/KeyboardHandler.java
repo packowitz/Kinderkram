@@ -17,7 +17,6 @@ public class KeyboardHandler implements OnKeyListener {
 
   public KeyboardHandler(View view) {
     PoolObjectFactory<KeyEvent> factory = new PoolObjectFactory<KeyEvent>() {
-      @Override
       public KeyEvent createObject() {
         return new KeyEvent();
       }
@@ -28,7 +27,6 @@ public class KeyboardHandler implements OnKeyListener {
     view.requestFocus();
   }
 
-  @Override
   public boolean onKey(View v, int keyCode, android.view.KeyEvent event) {
     if (event.getAction() == android.view.KeyEvent.ACTION_MULTIPLE) {
       return false;

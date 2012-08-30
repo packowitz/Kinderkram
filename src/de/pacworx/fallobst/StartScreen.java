@@ -41,7 +41,6 @@ public class StartScreen implements Screen {
     difficultyBounds = new Rectangle(0, World.HEIGHT - 250, World.WIDTH, 250);
   }
 
-  @Override
   public void render(float delta) {
     GL10 gl = Gdx.graphics.getGL10();
     gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
@@ -89,27 +88,21 @@ public class StartScreen implements Screen {
     }
   }
 
-  @Override
   public void dispose() {
   }
 
-  @Override
   public void pause() {
   }
 
-  @Override
   public void resize(int arg0, int arg1) {
   }
 
-  @Override
   public void resume() {
   }
 
-  @Override
   public void hide() {
   }
 
-  @Override
   public void show() {
   }
 

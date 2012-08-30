@@ -43,7 +43,6 @@ public class TestGame extends AndroidApplication implements ApplicationListener 
   }
 
 
-  @Override
   public void create() {
     // load the images for the droplet and the bucket, 48x48 pixels each
     dropImage = new Texture(Gdx.files.internal("test/droplet.png"));
@@ -84,7 +83,6 @@ public class TestGame extends AndroidApplication implements ApplicationListener 
     lastDropTime = TimeUtils.nanoTime();
   }
 
-  @Override
   public void render() {
     // clear the screen with a dark blue color. The
     // arguments to glClearColor are the red, green
@@ -147,7 +145,6 @@ public class TestGame extends AndroidApplication implements ApplicationListener 
     }
   }
 
-  @Override
   public void dispose() {
     // dispose of all the native resources
     dropImage.dispose();
@@ -157,15 +154,12 @@ public class TestGame extends AndroidApplication implements ApplicationListener 
     batch.dispose();
   }
 
-  @Override
   public void resize(int width, int height) {
   }
 
-  @Override
   public void pause() {
   }
 
-  @Override
   public void resume() {
   }
 }

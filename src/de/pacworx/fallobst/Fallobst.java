@@ -25,7 +25,6 @@ public class Fallobst implements Screen {
     batch = new SpriteBatch(100);
   }
 
-  @Override
   public void render(float delta) {
     if (world.state == World.STATE_LIVING) {
       world.update(delta, Gdx.input.getAccelerometerX());
@@ -102,29 +101,23 @@ public class Fallobst implements Screen {
       apple.position.y - (apple.size / 2), apple.size, apple.size);
   }
 
-  @Override
   public void dispose() {
   }
 
-  @Override
   public void pause() {
     world.pause();
   }
 
-  @Override
   public void resize(int width, int height) {
   }
 
-  @Override
   public void resume() {
     world.resume();
   }
 
-  @Override
   public void hide() {
   }
 
-  @Override
   public void show() {
   }
 
