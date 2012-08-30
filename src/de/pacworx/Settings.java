@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-import de.pacworx.farbeimer.FarbeimerSettings;
 import android.os.Environment;
 import android.util.Log;
 
@@ -15,6 +14,7 @@ public class Settings {
   private static String externalStoragePath;
   private static Properties properties = new Properties();
   private static Difficulty difficulty;
+  private static Boolean soundOn;
 
   public static void loadSettings() {
     if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -48,10 +48,6 @@ public class Settings {
     }
   }
 
-  public static FarbeimerSettings getFarbeimerSettings() {
-    return new FarbeimerSettings(properties);
-  }
-
   public static Difficulty getDifficulty() {
     if (difficulty == null) {
       String difficultyId = properties.getProperty("difficulty");
@@ -65,6 +61,32 @@ public class Settings {
   public static void setDifficulty(Difficulty newDifficulty) {
     properties.put("difficulty", newDifficulty.id);
     difficulty = newDifficulty;
+    save();
+  }
+
+  public static boolean isSoundOn() {
+    if (soundOn == null) {
+      String soundOnProperty = properties.getProperty("sound");
+      if (soundOnProperty != null) {
+        soundOn = Boolean.parseBoolean(soundOnProperty);
+      } else {
+        soundOn = true;
+      }
+    }
+    return soundOn;
+  }
+
+  public static void enableSound() {
+    setSoundOn(true);
+  }
+
+  public static void disableSound() {
+    setSoundOn(false);
+  }
+
+  private static void setSoundOn(boolean newSoundOn) {
+    properties.put("sound", Boolean.toString(newSoundOn));
+    soundOn = newSoundOn;
     save();
   }
 }

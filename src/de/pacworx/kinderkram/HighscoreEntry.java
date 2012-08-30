@@ -9,7 +9,7 @@ public class HighscoreEntry {
 
   public HighscoreEntry(int score) {
     this.score = score;
-    date = DateFormat.format("dd.MM  kk:mm", new java.util.Date()).toString();
+    date = DateFormat.format("dd.MM.  kk:mm", new java.util.Date()).toString();
   }
 
   public HighscoreEntry(int score, String date) {

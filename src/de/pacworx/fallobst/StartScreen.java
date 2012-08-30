@@ -11,7 +11,6 @@ import de.pacworx.Settings;
 import de.pacworx.kinderkram.Fonts;
 import de.pacworx.kinderkram.HighscoreEntry;
 import de.pacworx.kinderkram.OverlapTester;
-import de.pacworx.kinderkram.SettingsScreen;
 
 
 public class StartScreen implements Screen {
@@ -57,8 +56,8 @@ public class StartScreen implements Screen {
 
     Fonts.title_red.draw(batch, "Apfelernte", (World.WIDTH - titleWidth) / 2, 670);
 
-    float textWidth = Fonts.level_red.getBounds("Stufe: " + Settings.getDifficulty().description).width;
-    Fonts.level_red.draw(batch, "Stufe: " + Settings.getDifficulty().description, (World.WIDTH - textWidth) / 2,
+    float textWidth = Fonts.level_red.getBounds(Settings.getDifficulty().description).width;
+    Fonts.level_red.draw(batch, Settings.getDifficulty().description, (World.WIDTH - textWidth) / 2,
       580);
 
     hs_y = World.HEIGHT - 280;
@@ -82,8 +81,8 @@ public class StartScreen implements Screen {
       camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
       if (OverlapTester.pointInRectangle(backBounds, touchPoint.x, touchPoint.y)) {
         game.finish();
-      } else if (OverlapTester.pointInRectangle(difficultyBounds, touchPoint.x, touchPoint.y)) {
-        game.setScreen(new SettingsScreen(game, this));
+        //      } else if (OverlapTester.pointInRectangle(difficultyBounds, touchPoint.x, touchPoint.y)) {
+        //        game.setScreen(new SettingsScreen(game, this));
       } else {
         game.setScreen(new Fallobst(game));
       }

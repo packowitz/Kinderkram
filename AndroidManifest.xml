@@ -16,10 +16,6 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".farbeimer.FarbeimerActivity"
-              android:screenOrientation="portrait" 
-		          android:configChanges="keyboard|keyboardHidden|orientation" />
-        
         <activity android:name=".farbkleckse.FarbkleckseActivity"
               android:screenOrientation="portrait" 
 		          android:configChanges="keyboard|keyboardHidden|orientation" />

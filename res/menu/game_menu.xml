@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/sound_off" android:title="Ton aus" android:icon="@android:drawable/ic_lock_silent_mode"/>
+    <item android:id="@+id/sound_on" android:title="Ton an" android:icon="@android:drawable/ic_lock_silent_mode_off"/>
+    <item android:id="@+id/difficulty" android:title="Altersstufe" android:icon="@android:drawable/ic_menu_myplaces">
+        <menu>
+            <item android:id="@+id/dif_kindergarten"
+                  android:title="Kindergarten" />
+            <item android:id="@+id/dif_vorschule"
+                  android:title="Vorschule" />
+            <item android:id="@+id/dif_1_2_klasse"
+                  android:title="1./2. Klasse" />
+            <item android:id="@+id/dif_3_4_klasse"
+                  android:title="3./4. Klasse" />
+        </menu>
+    </item>
+    <item android:id="@+id/back" android:title="Spiel Beenden" android:icon="@android:drawable/ic_menu_close_clear_cancel"/>
+    <item android:id="@+id/play" android:title="Spielen" android:icon="@android:drawable/ic_media_play"/>
+</menu>

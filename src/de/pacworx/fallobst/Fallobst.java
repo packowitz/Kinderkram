@@ -27,7 +27,7 @@ public class Fallobst implements Screen {
 
   @Override
   public void render(float delta) {
-    if (world.state != World.STATE_GAME_OVER) {
+    if (world.state == World.STATE_LIVING) {
       world.update(delta, Gdx.input.getAccelerometerX());
     }
 
@@ -108,6 +108,7 @@ public class Fallobst implements Screen {
 
   @Override
   public void pause() {
+    world.pause();
   }
 
   @Override
@@ -116,6 +117,7 @@ public class Fallobst implements Screen {
 
   @Override
   public void resume() {
+    world.resume();
   }
 
   @Override

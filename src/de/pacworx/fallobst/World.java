@@ -15,6 +15,7 @@ public class World {
   public static final int HEIGHT = 720;
   public static final int STATE_LIVING = 0;
   public static final int STATE_GAME_OVER = 1;
+  public static final int STATE_PAUSED = 2;
 
   public float accelSpeed;
   public float maxFallingSpeed;
@@ -45,6 +46,18 @@ public class World {
     }
     createSpawningPositions();
     initApples();
+  }
+
+  public void pause() {
+    if (state != STATE_GAME_OVER) {
+      state = STATE_PAUSED;
+    }
+  }
+
+  public void resume() {
+    if (state == STATE_PAUSED) {
+      state = STATE_LIVING;
+    }
   }
 
   public void update(float delta, float accel) {

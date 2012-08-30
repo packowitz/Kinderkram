@@ -16,6 +16,7 @@ public class World implements InputProcessor {
   public static final int HEIGHT = 720;
   public static final int STATE_LIVING = 0;
   public static final int STATE_GAME_OVER = 1;
+  public static final int STATE_PAUSED = 2;
 
   private FarbkleckseGame game;
   private OrthographicCamera camera;
@@ -48,6 +49,18 @@ public class World implements InputProcessor {
     this.camera = camera;
     Gdx.input.setInputProcessor(this);
     nextBlob();
+  }
+
+  public void pause() {
+    if (state != STATE_GAME_OVER) {
+      state = STATE_PAUSED;
+    }
+  }
+
+  public void resume() {
+    if (state == STATE_PAUSED) {
+      state = STATE_LIVING;
+    }
   }
 
   public void update(float delta) {
@@ -141,14 +154,18 @@ public class World implements InputProcessor {
     if (touchInArea > -1) {
       if (colorAreas[blobColor] == touchInArea) {
         successCounter--;
-        Assets.blub.play(1);
+        if (Settings.isSoundOn()) {
+          Assets.blub.play(1);
+        }
         if (successCounter == 0) {
           finishGame();
         } else {
           nextBlob();
         }
       } else {
-        Assets.wrong.play(1);
+        if (Settings.isSoundOn()) {
+          Assets.wrong.play(1);
+        }
         resetBlob();
         penaltyTime = 2f;
         penaltySum += 2f;

@@ -57,7 +57,7 @@ public class MenuScreen extends Screen {
           }
         } else if ((event.y >= 260) && (event.y < 350)) {
           try {
-            Class clazz = Class.forName("de.pacworx.farbeimer.FarbeimerActivity");
+            Class clazz = Class.forName("de.pacworx.test.Playground");
             Activity activity = (AndroidGame) game;
             Intent intent = new Intent(activity, clazz);
             activity.startActivity(intent);

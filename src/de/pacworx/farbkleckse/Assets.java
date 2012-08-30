@@ -24,6 +24,7 @@ public class Assets {
   public static TextureRegion hs_4;
   public static TextureRegion hand;
   public static TextureRegion back;
+  public static TextureRegion settings;
   public static TextureRegion blob_los;
 
   public static Sound blub;
@@ -46,6 +47,7 @@ public class Assets {
     hs_4 = new TextureRegion(atlas, 368, 192, 64, 64);
     hand = new TextureRegion(atlas, 432, 0, 64, 64);
     back = new TextureRegion(atlas, 432, 64, 64, 64);
+    settings = new TextureRegion(atlas, 432, 128, 64, 64);
     blob_los = new TextureRegion(atlas, 240, 256, 128, 64);
 
     blub = Gdx.audio.newSound(Gdx.files.internal("farbkleckse/blub.ogg"));

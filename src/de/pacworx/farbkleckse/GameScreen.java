@@ -67,7 +67,7 @@ public class GameScreen implements Screen {
     textWidth = Fonts.calibri_brown.getBounds(Integer.toString(world.successCounter)).width;
     Fonts.calibri_brown.draw(batch, Integer.toString(world.successCounter), (World.WIDTH - textWidth) / 2, 39);
 
-    if (world.state == World.STATE_LIVING) {
+    if (world.state != World.STATE_GAME_OVER) {
       batch.draw(Assets.getBlob(world.blobColor), world.blobX, world.blobY, 90, 90);
     } else {
       timeText.setLength(0);
@@ -118,12 +118,14 @@ public class GameScreen implements Screen {
   }
 
   public void pause() {
+    world.pause();
   }
 
   public void resize(int arg0, int arg1) {
   }
 
   public void resume() {
+    world.resume();
   }
 
   public void show() {
