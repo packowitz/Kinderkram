@@ -22,7 +22,6 @@ public class AndroidAudio implements Audio {
     this.soundPool = new SoundPool(20, AudioManager.STREAM_MUSIC, 0);
   }
 
-  @Override
   public Music newMusic(String filename) {
     try {
       AssetFileDescriptor assetDescriptor = assets.openFd(filename);
@@ -32,7 +31,6 @@ public class AndroidAudio implements Audio {
     }
   }
 
-  @Override
   public Sound newSound(String filename) {
     try {
       AssetFileDescriptor assetDescriptor = assets.openFd(filename);

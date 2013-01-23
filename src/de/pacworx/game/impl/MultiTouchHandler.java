@@ -21,7 +21,6 @@ public class MultiTouchHandler implements TouchHandler {
 
     public MultiTouchHandler(View view, float scaleX, float scaleY) {
         PoolObjectFactory<TouchEvent> factory = new PoolObjectFactory<TouchEvent>() {
-            @Override
             public TouchEvent createObject() {
                 return new TouchEvent();
             }
@@ -33,7 +32,6 @@ public class MultiTouchHandler implements TouchHandler {
         this.scaleY = scaleY;
     }
 
-    @Override
     public boolean onTouch(View v, MotionEvent event) {
         synchronized (this) {
             int action = event.getAction() & MotionEvent.ACTION_MASK;
@@ -91,7 +89,6 @@ public class MultiTouchHandler implements TouchHandler {
         }
     }
 
-    @Override
     public boolean isTouchDown(int pointer) {
         synchronized (this) {
             if (pointer < 0 || pointer >= 20)
@@ -101,7 +98,6 @@ public class MultiTouchHandler implements TouchHandler {
         }
     }
 
-    @Override
     public int getTouchX(int pointer) {
         synchronized (this) {
             if (pointer < 0 || pointer >= 20)
@@ -111,7 +107,6 @@ public class MultiTouchHandler implements TouchHandler {
         }
     }
 
-    @Override
     public int getTouchY(int pointer) {
         synchronized (this) {
             if (pointer < 0 || pointer >= 20)
@@ -121,7 +116,6 @@ public class MultiTouchHandler implements TouchHandler {
         }
     }
 
-    @Override
     public List<TouchEvent> getTouchEvents() {
         synchronized (this) {
             int len = touchEvents.size();

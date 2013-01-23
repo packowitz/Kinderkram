@@ -30,7 +30,6 @@ public class AndroidGraphics implements Graphics {
     this.paint = new Paint();
   }
 
-  @Override
   public Pixmap newPixmap(String fileName, PixmapFormat format) {
     Config config = null;
     if (format == PixmapFormat.RGB565) {
@@ -76,37 +75,31 @@ public class AndroidGraphics implements Graphics {
     return new AndroidPixmap(bitmap, format);
   }
 
-  @Override
   public void clear(int color) {
     canvas.drawRGB((color & 0xff0000) >> 16, (color & 0xff00) >> 8,
       (color & 0xff));
   }
 
-  @Override
   public void clear(int r, int g, int b) {
     canvas.drawRGB(r, g, b);
   }
 
-  @Override
   public void drawPixel(int x, int y, int color) {
     paint.setColor(color);
     canvas.drawPoint(x, y, paint);
   }
 
-  @Override
   public void drawLine(int x, int y, int x2, int y2, int color) {
     paint.setColor(color);
     canvas.drawLine(x, y, x2, y2, paint);
   }
 
-  @Override
   public void drawRect(int x, int y, int width, int height, int color) {
     paint.setColor(color);
     paint.setStyle(Style.FILL);
     canvas.drawRect(x, y, x + width - 1, y + width - 1, paint);
   }
 
-  @Override
   public void drawPixmap(Pixmap pixmap, int x, int y, int srcX, int srcY,
     int srcWidth, int srcHeight) {
     srcRect.left = srcX;
@@ -122,12 +115,10 @@ public class AndroidGraphics implements Graphics {
     canvas.drawBitmap(((AndroidPixmap) pixmap).bitmap, srcRect, dstRect, null);
   }
 
-  @Override
   public void drawPixmap(Pixmap pixmap, int x, int y) {
     canvas.drawBitmap(((AndroidPixmap) pixmap).bitmap, x, y, null);
   }
 
-  @Override
   public void drawPixmap(Pixmap pixmap, int x, int y, int dstWidth, int dstHeight) {
     srcRect.left = 0;
     srcRect.top = 0;
@@ -142,17 +133,14 @@ public class AndroidGraphics implements Graphics {
     canvas.drawBitmap(((AndroidPixmap) pixmap).bitmap, srcRect, dstRect, null);
   }
 
-  @Override
   public void drawText(String text, int x, int y, Paint paint) {
     canvas.drawText(text, x, y, paint);
   }
 
-  @Override
   public int getWidth() {
     return frameBuffer.getWidth();
   }
 
-  @Override
   public int getHeight() {
     return frameBuffer.getHeight();
   }

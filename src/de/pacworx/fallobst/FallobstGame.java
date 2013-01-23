@@ -23,7 +23,6 @@ public class FallobstGame extends Game {
     return activity;
   }
 
-  @Override
   public void create() {
     Assets.init();
     Fonts.init();

@@ -25,7 +25,6 @@ public class CameraPlayground implements ApplicationListener {
   private float rotationSpeed;
   Vector3 touchPos = new Vector3();
 
-  @Override
   public void create() {
     rotationSpeed = 0.5f;
     mesh = new Mesh(true, 4, 6,
@@ -48,7 +47,6 @@ public class CameraPlayground implements ApplicationListener {
 
   }
 
-  @Override
   public void render() {
     handleInput();
 
@@ -136,22 +134,18 @@ public class CameraPlayground implements ApplicationListener {
     }
   }
 
-  @Override
   public void resize(int width, int height) {
     // TODO Auto-generated method stub
   }
 
-  @Override
   public void resume() {
     // TODO Auto-generated method stub
   }
 
-  @Override
   public void dispose() {
     // TODO Auto-generated method stub
   }
 
-  @Override
   public void pause() {
     // TODO Auto-generated method stub
   }

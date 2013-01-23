@@ -78,27 +78,22 @@ public abstract class AndroidGame extends Activity implements Game {
     }
   }
 
-  @Override
   public Input getInput() {
     return input;
   }
 
-  @Override
   public FileIO getFileIO() {
     return fileIO;
   }
 
-  @Override
   public Graphics getGraphics() {
     return graphics;
   }
 
-  @Override
   public Audio getAudio() {
     return audio;
   }
 
-  @Override
   public void setScreen(Screen screen) {
     if (screen == null) {
       throw new IllegalArgumentException("Screen must not be null");
