@@ -52,7 +52,7 @@ public class StartScreen implements Screen {
     batch.begin();
 
     batch.draw(Assets.background, 0, 0, World.WIDTH, World.HEIGHT);
-    batch.draw(Assets.back, 40, 40, 130, 130);
+    batch.draw(Assets.back, 40, 40, 120, 120);
 
     Fonts.title_red.draw(batch, "Apfelernte", (World.WIDTH - titleWidth) / 2, 670);
 
